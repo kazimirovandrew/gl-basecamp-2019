@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'com.github.slamdev.swagger' version '0.0.49'
+}
+
+group 'com.basecamp.app'
+version '1.0-SNAPSHOT'
+
+def hello = "Hello!"
+def bye = "Bye!"
+
+tasks.register("beforeBuild"){
+    doLast{
+        println hello
+    }
+}
+
+tasks.register("afterBuild"){
+    doLast{
+        println bye
+    }
+}
+
+build.dependsOn(beforeBuild)
+build.finalizedBy(afterBuild)
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'com.google.guava', name: 'guava', version: '27.0.1-jre'
+}
